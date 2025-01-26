@@ -1,7 +1,7 @@
-# BRCCS
-BRCCS (Brain Rot Content Creation System)
-<br>
+# 🧠💥 Brain Rot Generator  
+**Make content that does not make sense**  
 
-Content created by this system
-<br>
-![1]("https://github.com/DevyDhanish/BRCCS/blob/main/examples/Brainrot_2025-01-24_223135_final_video.mp4")
+---
+
+## ✨ WHAT EVEN IS THIS?  
+Bruh, this is your ultimate tool for creating content so chaotic, it feels illegal. Wanna make posts that fry brains, spark confusion, or just scream ✨unhinged✨? This is the software for you.
