@@ -58,62 +58,61 @@ def add_asset_info(density, asset_pool, of_type):
                          of_type)
 
 def randomize(vid_struct, duration, total_duration):
-    pass
 
-    # vid = vid_struct["Video"]
-    # aud = vid_struct["Audio"]
-    #
-    # # video
-    # for vids in vid:
-    #
-    #     if vids["of_type"] == IMAGE:
-    #         start = random.randint(0, total_duration - duration)
-    #         end = start + duration
-    #         vids["start_at"] = TimeUtils.seconds_to_timestamp(start)
-    #         vids["end_at"] = TimeUtils.seconds_to_timestamp(end)
-    #
-    #     if vids["of_type"] == VIDEO:
-    #         clip_duration = int(rw.read_file(vids["path"]).duration)
-    #         start = random.randint(0, total_duration - duration)
-    #         end = start + duration
-    #         frm = random.randint(0, abs(clip_duration - duration))
-    #         to = frm + duration
-    #
-    #         if clip_duration > duration:
-    #             vids["start_at"] = TimeUtils.seconds_to_timestamp(start)
-    #             vids["end_at"] = TimeUtils.seconds_to_timestamp(end)
-    #             vids["from"] = TimeUtils.seconds_to_timestamp(frm)
-    #             vids["to"] = TimeUtils.seconds_to_timestamp(to)
-    #
-    #         else:
-    #             vids["start_at"] = TimeUtils.seconds_to_timestamp(0)
-    #             vids["end_at"] = TimeUtils.seconds_to_timestamp(clip_duration)
-    #             vids["from"] = TimeUtils.seconds_to_timestamp(0)
-    #             vids["to"] = TimeUtils.seconds_to_timestamp(clip_duration)
-    #
-    # # audio
-    #
-    # for auds in aud:
-    #
-    #     if auds["of_type"] == AUDIO:
-    #         clip_duration = int(rw.read_file(auds["path"]).duration)
-    #         start = random.randint(0, total_duration - duration)
-    #         end = start + duration
-    #         frm = random.randint(0, abs(clip_duration - duration))
-    #         to = frm + duration
-    #
-    #         if clip_duration > duration:
-    #
-    #             auds["start_at"] = TimeUtils.seconds_to_timestamp(start)
-    #             auds["end_at"] = TimeUtils.seconds_to_timestamp(end)
-    #             auds["from"] = TimeUtils.seconds_to_timestamp(frm)
-    #             auds["to"] = TimeUtils.seconds_to_timestamp(to)
-    #
-    #         else:
-    #             auds["start_at"] = TimeUtils.seconds_to_timestamp(start)
-    #             auds["end_at"] = TimeUtils.seconds_to_timestamp(end)
-    #             auds["from"] = TimeUtils.seconds_to_timestamp(0)
-    #             auds["to"] = TimeUtils.seconds_to_timestamp(round(clip_duration))
+    vid = vid_struct["Video"]
+    aud = vid_struct["Audio"]
+
+    # video
+    for vids in vid:
+
+        if vids["of_type"] == IMAGE:
+            start = random.randint(0, total_duration - duration)
+            end = start + duration
+            vids["start_at"] = TimeUtils.seconds_to_timestamp(start)
+            vids["end_at"] = TimeUtils.seconds_to_timestamp(end)
+
+        if vids["of_type"] == VIDEO:
+            clip_duration = int(rw.read_file(vids["path"]).duration)
+            start = random.randint(0, total_duration - duration)
+            end = start + duration
+            frm = random.randint(0, abs(clip_duration - duration))
+            to = frm + duration
+
+            if clip_duration > duration:
+                vids["start_at"] = TimeUtils.seconds_to_timestamp(start)
+                vids["end_at"] = TimeUtils.seconds_to_timestamp(end)
+                vids["from"] = TimeUtils.seconds_to_timestamp(frm)
+                vids["to"] = TimeUtils.seconds_to_timestamp(to)
+
+            else:
+                vids["start_at"] = TimeUtils.seconds_to_timestamp(0)
+                vids["end_at"] = TimeUtils.seconds_to_timestamp(clip_duration)
+                vids["from"] = TimeUtils.seconds_to_timestamp(0)
+                vids["to"] = TimeUtils.seconds_to_timestamp(clip_duration)
+
+    # audio
+
+    for auds in aud:
+
+        if auds["of_type"] == AUDIO:
+            clip_duration = int(rw.read_file(auds["path"]).duration)
+            start = random.randint(0, total_duration - duration)
+            end = start + duration
+            frm = random.randint(0, abs(clip_duration - duration))
+            to = frm + duration
+
+            if clip_duration > duration:
+
+                auds["start_at"] = TimeUtils.seconds_to_timestamp(start)
+                auds["end_at"] = TimeUtils.seconds_to_timestamp(end)
+                auds["from"] = TimeUtils.seconds_to_timestamp(frm)
+                auds["to"] = TimeUtils.seconds_to_timestamp(to)
+
+            else:
+                auds["start_at"] = TimeUtils.seconds_to_timestamp(start)
+                auds["end_at"] = TimeUtils.seconds_to_timestamp(end)
+                auds["from"] = TimeUtils.seconds_to_timestamp(0)
+                auds["to"] = TimeUtils.seconds_to_timestamp(round(clip_duration))
 
 
 def randomize_timestamps(clip_struct, duration, total_duration, rand_strt_end, rand_frm_to):
@@ -139,10 +138,9 @@ def randomize_timestamps(clip_struct, duration, total_duration, rand_strt_end, r
 
         # if the video is shorter that what we want then just put the whole video
         if clip_duration < duration:
-            clip_struct["from"] = TimeUtils.random_timestamp(
-                TimeUtils.seconds_to_timestamp(0),
-                TimeUtils.seconds_to_timestamp(round(clip_duration))
-            )
+            clip_struct["from"] = TimeUtils.seconds_to_timestamp(0),
+            clip_struct["to"] = TimeUtils.seconds_to_timestamp(clip_duration)
+            return
 
         # random part of the video between 0 to video's length
         clip_struct["from"] = TimeUtils.random_timestamp(
@@ -203,8 +201,11 @@ if __name__ == "__main__":
 
     # randomize each clips timeframes
 
-    randomize_clip_timestamps(vs.get_video_structure(), clip_duration_seconds, total_duration_seconds)
-    randomize_clip_timestamps(vs.get_video_structure(), clip_duration_seconds, total_duration_seconds)
+    # this is givving us problem
+    #randomize_clip_timestamps(vs.get_video_structure(), clip_duration_seconds, total_duration_seconds)
+    #randomize_clip_timestamps(vs.get_video_structure(), clip_duration_seconds, total_duration_seconds)
+
+    randomize(vs.get_timeline_structure(), clip_duration_seconds, total_duration_seconds)
 
     folder_name = f"Brainrot_{datetime.date.today()}_{time.strftime('%H%M%S', time.localtime())}"
     output_folder_path = os.path.abspath(os.path.join(output_directory, folder_name))
@@ -215,16 +216,15 @@ if __name__ == "__main__":
     final_video_filename = f"{folder_name}_final_video.mp4"
 
     # Write video structure to file
-    #rw.write_to_file(os.path.join(output_folder_path, video_structure_filename), vs.get_timeline_structure())
+    rw.write_to_file(os.path.join(output_folder_path, video_structure_filename), vs.get_timeline_structure())
 
     #exit()
 
     # Read the video structure back from file
-    #video_structure_data = rw.read_file(os.path.join(output_folder_path, video_structure_filename))
+    video_structure_data = rw.read_file(os.path.join(output_folder_path, video_structure_filename))
 
     # Initialize the video editor
     video_editor = Editor()
-    video_structure_data = vs.get_timeline_structure()
     # Create a clip using the video structure
     video_editor.create_timeline_by_video_structure(video_structure_data)
 
