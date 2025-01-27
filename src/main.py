@@ -175,9 +175,9 @@ if __name__ == "__main__":
     clip_duration_seconds = 1
 
     # parameters for video gen
-    clip_density = 3   # how many videos to use
-    audio_density = 3  # how many audios to use
-    img_density = 5    # how many img to use
+    clip_density = 100   # how many videos to use
+    audio_density = 100  # how many audios to use
+    img_density = 100    # how many img to use
 
     # add the meta data as the background
     # meta data directory
@@ -202,10 +202,10 @@ if __name__ == "__main__":
     # randomize each clips timeframes
 
     # this is givving us problem
-    #randomize_clip_timestamps(vs.get_video_structure(), clip_duration_seconds, total_duration_seconds)
-    #randomize_clip_timestamps(vs.get_video_structure(), clip_duration_seconds, total_duration_seconds)
+    randomize_clip_timestamps(vs.get_video_structure(), clip_duration_seconds, total_duration_seconds)
+    randomize_clip_timestamps(vs.get_audio_structure(), clip_duration_seconds, total_duration_seconds)
 
-    randomize(vs.get_timeline_structure(), clip_duration_seconds, total_duration_seconds)
+    #randomize(vs.get_timeline_structure(), clip_duration_seconds, total_duration_seconds)
 
     folder_name = f"Brainrot_{datetime.date.today()}_{time.strftime('%H%M%S', time.localtime())}"
     output_folder_path = os.path.abspath(os.path.join(output_directory, folder_name))
