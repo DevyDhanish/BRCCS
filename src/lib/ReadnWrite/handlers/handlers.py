@@ -5,6 +5,7 @@ from .texthandler import TextHandler
 from .imagehandler import ImageHandler
 from .videohandler import VideoHandler
 from .audiohandler import AudioHandler
+from .generichandler import GenericHandler
 
 def _get_handler(handler_type) -> FileHandler:
     handlers = {
@@ -22,5 +23,6 @@ def _get_handler(handler_type) -> FileHandler:
         handler = handlers[handler_type]
         return handler
 
+    # give the nigga a generic handler
     except KeyError:
-        print(f"Handler for type {handler_type} does not exist")
+        return GenericHandler()

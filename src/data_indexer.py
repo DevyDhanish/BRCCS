@@ -1,7 +1,4 @@
-import json
 import os
-
-
 from lib.ReadnWrite.RnW import ReaderAndWriter
 
 Data = "..\\data"
@@ -22,6 +19,7 @@ def get_full_path(rel_dir, filename):
 def index_audios():
     items = os.listdir(Audio)
 
+    count = 0
     for item_name in items:
         data = {}
         data["name"] = item_name
@@ -29,10 +27,14 @@ def index_audios():
         data["format"] = item_name.split(".")[-1]
 
         idx["Audios"].append(data)
+        count += 1
+
+    return count
 
 def index_videos():
     items = os.listdir(Video)
 
+    count = 0
     for item_name in items:
         data = {}
         data["name"] = item_name
@@ -40,10 +42,14 @@ def index_videos():
         data["format"] = item_name.split(".")[-1]
 
         idx["Videos"].append(data)
+        count += 1
+
+    return count
 
 def index_images():
     items = os.listdir(Images)
 
+    count = 0
     for item_name in items:
         data = {}
 
@@ -52,13 +58,32 @@ def index_images():
         data["format"] = item_name.split(".")[-1]
 
         idx["Images"].append(data)
+        count += 1
+
+    return count
 
 def main():
-    index_audios()
-    index_videos()
-    index_images()
-
     rnw = ReaderAndWriter()
+    # see how many we had before
+
+    old_idx = {}
+    try:
+        old_idx = rnw.read_file(os.path.abspath(os.path.join(Data, "data_index.json")))
+    except FileNotFoundError:
+        print("No old data_idx")
+
+    old_vid_amt = len(old_idx["Videos"])
+    old_aud_amt = len(old_idx["Audios"])
+    old_img_amt = len(old_idx["Images"])
+
+    idx_aud = index_audios()
+    print(f"Indexed {idx_aud - old_aud_amt} new audios")
+
+    idx_vids = index_videos()
+    print(f"Indexed {idx_vids - old_vid_amt} new videos")
+
+    idx_img = index_images()
+    print(f"Indexed {idx_img - old_img_amt} new images")
 
     rnw.write_to_file(os.path.abspath(os.path.join(Data, "data_index.json")), idx)
 
