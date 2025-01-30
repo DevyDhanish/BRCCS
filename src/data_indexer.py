@@ -85,7 +85,7 @@ def main():
     idx_img = index_images()
     print(f"Indexed {idx_img - old_img_amt} new images")
 
-    rnw.write_to_file(os.path.abspath(os.path.join(Data, "data_index.json")), idx)
+    rnw.write_to_file("data_index.json", idx)
 
 if __name__ == "__main__":
     main()

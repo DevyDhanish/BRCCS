@@ -81,7 +81,12 @@ class TimeUtils:
 
             rand_secs = random.randint(min_secs, max_secs)
 
-            return TimeUtils.seconds_to_timestamp(rand_secs)
+            to_ret = TimeUtils.seconds_to_timestamp(rand_secs)
+
+            if isinstance(to_ret, list):
+                print("Found one")
+
+            return to_ret
 
         except TypeError:
             Logger.logerr(f"{(min, max)} is in wrong format nigga.")
