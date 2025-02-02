@@ -1,5 +1,5 @@
 import os
-from lib.ReadnWrite.RnW import ReaderAndWriter
+from .lib.ReadnWrite.RnW import ReaderAndWriter
 
 Data = "..\\data"
 Audio = "..\\data\\Audio"
@@ -62,13 +62,13 @@ def index_images():
 
     return count
 
-def main():
+def index_data():
     rnw = ReaderAndWriter()
     # see how many we had before
 
     old_idx = {}
     try:
-        old_idx = rnw.read_file(os.path.abspath(os.path.join(Data, "data_index.json")))
+        old_idx = rnw.read_file(os.path.abspath(os.path.join(".", "data_index.json")))
     except FileNotFoundError:
         print("No old data_idx")
 
@@ -86,6 +86,6 @@ def main():
     print(f"Indexed {idx_img - old_img_amt} new images")
 
     rnw.write_to_file("data_index.json", idx)
-
-if __name__ == "__main__":
-    main()
+#
+# if __name__ == "__main__":
+#     main()

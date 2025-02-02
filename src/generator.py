@@ -163,7 +163,7 @@ def randomize_clip_timestamps(clips, duration, total_duration):
             randomize_timestamps(clip, duration, total_duration, True, True)
 
 
-def generate(total_duration_seconds, clip_duration_seconds, clip_density, audio_density, img_density, data_index_directory, output_directory):
+def generate(total_duration_seconds, clip_duration_seconds, audio_duration_seconds, clip_density, audio_density, img_density, data_index_directory, output_directory):
     # Read the data index file
     data_index = rw.read_file(data_index_directory)
 
@@ -193,7 +193,7 @@ def generate(total_duration_seconds, clip_duration_seconds, clip_density, audio_
 
     # this is givving us problem
     randomize_clip_timestamps(vs.get_video_structure(), clip_duration_seconds, total_duration_seconds)
-    randomize_clip_timestamps(vs.get_audio_structure(), clip_duration_seconds, total_duration_seconds)
+    randomize_clip_timestamps(vs.get_audio_structure(), audio_duration_seconds, total_duration_seconds)
 
 
     #randomize(vs.get_timeline_structure(), clip_duration_seconds, total_duration_seconds)

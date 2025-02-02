@@ -2,7 +2,7 @@ import time
 from os import write
 
 from moviepy import *
-from lib.ReadnWrite.RnW import ReaderAndWriter
+from .lib.ReadnWrite.RnW import ReaderAndWriter
 
 import os
 import shutil
@@ -81,7 +81,7 @@ def do_the_thing():
         move_file(full_path, os.path.abspath(os.path.join(video_save_path, files)))
         print(f"Moved {files} to {video_save_path}")
 
-if __name__ == "__main__":
+def organize():
 
     while len(os.listdir(data_shit_pool_dir)) > 0:
 

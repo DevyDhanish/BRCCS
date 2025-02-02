@@ -6,6 +6,8 @@ and run ```BRCCS/src/data_organizer.py```
 
 # todo
 <p>1 - refactor the entire code base </p>
+2 - randomize video size as well
+3 - create a single json file with all the file paths and parameters
 
 
 # v2
